@@ -2,6 +2,7 @@ import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 import '../widgetBuilder/darkContainer.dart';
 import '../widgetBuilder/bottomButton.dart';
+import '../widgetBuilder/shareModal.dart';
 
 class ResultsPage extends StatelessWidget {
   ResultsPage({
@@ -13,6 +14,7 @@ class ResultsPage extends StatelessWidget {
   final String weightLabel;
   final String weight;
   final String weightDescription;
+  final ShareModal shareModal = new ShareModal();
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +38,13 @@ class ResultsPage extends StatelessWidget {
                           : "No weight provided",
                       style: resultTextStyle,
                     ),
-                    Text(
-                      (weight != null) ? weight : "N/A",
-                      style: BMITextStyle,
-                    ),
+                    Stack(children: [
+                      Text(
+                        (weight != null) ? weight : "N/A",
+                        style: BMITextStyle,
+                      ),
+                      Positioned(top: 0.0, right: 0.0, child: ShareModal())
+                    ]),
                     Text(
                       (weightDescription != null)
                           ? weightDescription
